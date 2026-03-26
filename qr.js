@@ -1,6 +1,6 @@
 const { makeid } = require('./gen-id');
 const express = require('express');
-const QRCode = require('qrcode');
+// ❌ Supprime cette ligne : const QRCode = require('qrcode');
 const fs = require('fs');
 let router = express.Router();
 const pino = require("pino");
@@ -27,7 +27,6 @@ router.get('/', async (req, res) => {
 
         try {
             let sock = makeWASocket({
-                // FIX: auth complet avec makeCacheableSignalKeyStore (était juste `auth: state`)
                 auth: {
                     creds: state.creds,
                     keys: makeCacheableSignalKeyStore(state.keys, pino({ level: "fatal" }).child({ level: "fatal" })),
@@ -41,7 +40,11 @@ router.get('/', async (req, res) => {
             sock.ev.on("connection.update", async (s) => {
                 const { connection, lastDisconnect, qr } = s;
 
-                if (qr) await res.end(await QRCode.toBuffer(qr));
+                if (qr) {
+                    // ✅ Import dynamique de qrcode
+                    const QRCode = await import('qrcode');
+                    await res.end(await QRCode.default.toBuffer(qr));
+                }
 
                 if (connection == "open") {
                     await delay(5000);
@@ -81,7 +84,6 @@ router.get('/', async (req, res) => {
                         }, { quoted: code });
 
                     } catch (e) {
-                        // FIX: await manquant sur sendMessage (ddd était une Promise non résolue)
                         let ddd = await sock.sendMessage(sock.user.id, { text: e.message || String(e) });
 
                         let desc = `𝐐𝐑 𝐂𝐎𝐃𝐄 𝐂𝐎𝐍𝐍𝐄𝐂𝐓𝐄𝐃
