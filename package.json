@@ -3,23 +3,27 @@
   "version": "0.0.1",
   "description": "A multi functional whatsapp bot Web paircode.",
   "main": "index.js",
+  
+"engines": {
+    "node": ">=20.0.0"
+  },
+  
   "scripts": {
     "start": "pm2 start index.js --deep-monitoring --attach --name MEGALODON-MD",
     "stop": "pm2 stop MEGALODON-MD",
     "restart": "pm2 restart MEGALODON-MD"
   },
   "dependencies": {
-    "@whiskeysockets/baileys": "npm:wileys",
+    "@whiskeysockets/baileys": "^7.0.0-rc.6",
     "@adiwajshing/keyed-db": "^0.2.4",
-    "qrcode": "^1.5.3",
-    "awesome-phonenumber": "^2.64.0",
-    "pino": "^8.1.0",
-    "phone": "3.1.30",
-    "body-parser": "^1.20.1",
-    "express": "^4.18.1",
-    "path": "^0.12.7",
-    "megajs": "1.1.7",
-    "pm2": "^5.4.0",
-    "async-mutex": "0.4.1"
+    "awesome-phonenumber": "^5.9.0",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "fs-extra": "^11.3.0",
+    "megajs": "^1.3.9",
+    "pino": "^9.5.0",
+    "qrcode": "^1.5.4",
+    "qrcode-terminal": "^0.12.0"
   }
 }
