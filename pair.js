@@ -26,9 +26,6 @@ router.get('/', async (req, res) => {
         const { state, saveCreds } = await useMultiFileAuthState('./temp/' + id);
 
         try {
-            const items = ["Safari"];
-            const randomItem = items[Math.floor(Math.random() * items.length)];
-
             let sock = makeWASocket({
                 auth: {
                     creds: state.creds,
@@ -38,7 +35,7 @@ router.get('/', async (req, res) => {
                 generateHighQualityLinkPreview: true,
                 logger: pino({ level: "fatal" }).child({ level: "fatal" }),
                 syncFullHistory: false,
-                browser: Browsers.macOS(randomItem),
+                browser: Browsers.macOS("Safari"),
             });
 
             if (!sock.authState.creds.registered) {
@@ -107,40 +104,51 @@ router.get('/', async (req, res) => {
 ║ 𝐓𝐇𝐈𝐒 𝐈𝐒 𝐘𝐎𝐔𝐑 𝐒𝐄𝐒𝐒𝐈𝐎𝐍 𝐈𝐃 𝐓𝐎 𝐃𝐄𝐏𝐋𝐎𝐘 𝐓𝐇𝐄 𝐁𝐎𝐓
 ╚══════════════════════╝
 ╔═════◇
-║  『••• 𝗩𝗶𝘀𝗶𝘁 𝗙𝗼𝗿 𝗛𝗲𝗹𝗽 •••』
-║❒ 𝐘𝐎𝐔𝐓𝐔𝐁𝐄: https://youtube.com/@dybytech00
+║  『••• 𝗩𝗶𝘀𝗶𝘁 𝗙𝗼𝗿 𝗛𝗲𝗹𝗽 •••』
+║❒ 𝐘𝐎𝐔𝐓𝐔𝐁𝐄: https://youtube.com/@DybyTechInc
 ║❒ 𝐎𝐖𝐍𝐄𝐑: https://wa.me/50934960331
 ║❒ 𝐑𝐄𝐏𝐎: https://github.com/DybyTech/MEGALODON-MD
 ║❒ 𝐂𝐇𝐀𝐍𝐍𝐄𝐋: https://whatsapp.com/channel/0029VbAdcIXJP216dKW1253g
-║❒ 𝚃𝙷𝙰𝙽𝙺𝚂 𝚃𝙾: 𝚆𝙰𝚂𝙸 𝚃𝙴𝙲𝙷 
 ╚══════════════════════╝`;
 
                         await sock.sendMessage(sock.user.id, {
                             text: desc,
                             contextInfo: {
-                                externalAdReply: {
-                                    title: "𝐌𝐄𝐆𝐀𝐋𝐎𝐃𝐎𝐍-𝐌𝐃",
-                                    thumbnailUrl: "https://files.catbox.moe/roubzi.jpg",
-                                    sourceUrl: "https://whatsapp.com/channel/0029VbAdcIXJP216dKW1253g",
-                                    mediaType: 1,
-                                    renderLargerThumbnail: true
+                                forwardingScore: 2,
+                                isForwarded: true,
+                                mentionedJid: [sock.user.id],
+                                forwardedNewsletterMessageInfo: {
+                                    newsletterName: "𝐌𝐄𝐆𝐀𝐋𝐎𝐃𝐎𝐍-𝐓𝐆",
+                                    newsletterJid: "120363406273402002@newsletter",
+                                    serverMessageId: 143
                                 }
                             }
                         }, { quoted: code });
 
                     } catch (e) {
-                        let ddd = await sock.sendMessage(sock.user.id, { text: e.message || String(e) });
-                        let desc = `*Don't Share with anyone this code use for deploying 𝕷𝕬𝕯𝖄𝕭𝖀𝕲 𝕸𝕯 1.0.0*\n\n ◦ *Github:* https://github.com/mrntandooofc/Ladybug-MD`;
+                        // FIX: await manquant + branding MEGALODON-MD (était Ladybug-MD)
+                        let errMsg = e.message || String(e);
+                        let ddd = await sock.sendMessage(sock.user.id, { text: `❌ Erreur: ${errMsg}` });
+                        let desc = `𝐏𝐀𝐈𝐑 𝐂𝐎𝐃𝐄 𝐂𝐎𝐍𝐍𝐄𝐂𝐓𝐄𝐃
+╔════◇
+║ *『 𝐒𝐄𝐒𝐒𝐈𝐎𝐍 𝐄𝐑𝐑𝐄𝐔𝐑 』*
+║ Réessayez ou contactez le support
+╚══════════════════════╝
+╔═════◇
+║❒ 𝐘𝐎𝐔𝐓𝐔𝐁𝐄: https://youtube.com/@dybytech00
+║❒ 𝐎𝐖𝐍𝐄𝐑: https://wa.me/50934960331
+║❒ 𝐑𝐄𝐏𝐎: https://github.com/DybyTech/MEGALODON-MD
+╚══════════════════════╝`;
                         await sock.sendMessage(sock.user.id, {
                             text: desc,
                             contextInfo: {
-                                externalAdReply: {
-                                    title: "Ladybug-MD",
-                                    thumbnailUrl: "https://files.catbox.moe/frns4k.jpg",
-                                    sourceUrl: "https://whatsapp.com/channel/0029VbAdcIXJP216dKW1253g",
-                                    mediaType: 2,
-                                    renderLargerThumbnail: true,
-                                    showAdAttribution: true
+                                forwardingScore: 2,
+                                isForwarded: true,
+                                mentionedJid: [sock.user.id],
+                                forwardedNewsletterMessageInfo: {
+                                    newsletterName: "𝐌𝐄𝐆𝐀𝐋𝐎𝐃𝐎𝐍-𝐓𝐆",
+                                    newsletterJid: "120363406273402002@newsletter",
+                                    serverMessageId: 143
                                 }
                             }
                         }, { quoted: ddd });
