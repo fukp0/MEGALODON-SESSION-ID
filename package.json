@@ -4,9 +4,7 @@
   "description": "A multi functional whatsapp bot Web paircode.",
   "main": "index.js",
   "scripts": {
-    "start": "pm2 start index.js --deep-monitoring --attach --name MEGALODON-MD",
-    "stop": "pm2 stop MEGALODON-MD",
-    "restart": "pm2 restart MEGALODON-MD"
+    "start": "node index.js"
   },
   "dependencies": {
     "@whiskeysockets/baileys": "github:DybyTechX/Baileys",
@@ -17,9 +15,7 @@
     "phone": "3.1.30",
     "body-parser": "^1.20.1",
     "express": "^4.18.1",
-    "path": "^0.12.7",
     "megajs": "1.1.7",
-    "pm2": "^5.4.0",
     "async-mutex": "0.4.1"
   }
 }
