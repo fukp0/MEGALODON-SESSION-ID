@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>𝐌𝐄𝐆𝐀𝐋𝐎𝐃𝐎𝐍-𝐌𝐃 | Pair Code</title>
+  <title>MEGALODON-MD | Pair Code</title>
   <link rel="icon" type="image/jpg" href="https://files.catbox.moe/nzc6xk.jpg"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet"/>
@@ -67,35 +67,53 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    .container::before, .container::after {
-      content: ''; position: absolute;
-      width: 20px; height: 20px;
-      border-color: var(--accent); border-style: solid;
-    }
-    .container::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; border-radius: 20px 0 0 0; }
-    .container::after  { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; border-radius: 0 0 20px 0; }
-
     .header { text-align: center; margin-bottom: 28px; }
 
-    .logo-wrap { position: relative; width: 80px; height: 80px; margin: 0 auto 16px; }
-
-    .logo-ring {
-      position: absolute; inset: 0; border-radius: 50%;
-      border: 2px solid var(--accent); border-top-color: var(--accent2);
-      animation: spin 3s linear infinite;
-    }
-
+    
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    .logo-img { position: absolute; inset: 6px; border-radius: 50%; object-fit: cover; }
+    .logo-wrap {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 16px;
+}
 
-    .logo-inner {
-      position: absolute; inset: 6px; border-radius: 50%;
-      background: linear-gradient(135deg, rgba(168,85,255,0.15), rgba(255,45,155,0.15));
-      display: none; align-items: center; justify-content: center;
-      font-size: 26px; color: var(--accent);
-    }
+.logo-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  border-top-color: var(--accent2);
+  animation: spin 3s linear infinite;
+}
 
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.logo-img {
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  object-fit: cover;
+  width: calc(100% - 12px);
+  height: calc(100% - 12px);
+}
+
+.logo-inner {
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(168,85,255,0.15), rgba(255,45,155,0.15));
+  display: flex; /* Permet de centrer le contenu */
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  color: var(--accent);
+  pointer-events: none; /* Empêche les clics dessus */
+}
     .title {
       font-family: 'Orbitron', monospace;
       font-size: 20px; font-weight: 900; letter-spacing: 2px;
@@ -107,14 +125,7 @@
     .subtitle { font-size: 12px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
 
     .social-row { display: flex; justify-content: center; gap: 10px; margin: 18px 0 24px; }
-
-    .social-row a {
-      width: 38px; height: 38px; border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 15px; color: #fff; text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s;
-      border: 1px solid rgba(255,255,255,0.08);
-    }
+    .social-row a { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 15px; color: #fff; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; border: 1px solid rgba(255,255,255,0.08); }
     .social-row a.yt { background: rgba(255,0,0,0.75); }
     .social-row a.tg { background: rgba(0,136,204,0.75); }
     .social-row a.wa { background: rgba(37,211,102,0.75); }
@@ -124,18 +135,9 @@
     .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border-bright), transparent); margin-bottom: 22px; }
 
     .input-label { display: block; font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
-
     .input-wrap { position: relative; margin-bottom: 16px; }
-
     .input-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 14px; pointer-events: none; }
-
-    .input-field {
-      width: 100%; padding: 13px 14px 13px 40px;
-      background: rgba(0,0,0,0.35); border: 1px solid var(--border); border-radius: 12px;
-      color: var(--text); font-family: 'Rajdhani', sans-serif;
-      font-size: 15px; font-weight: 600; letter-spacing: 0.5px;
-      transition: border-color 0.2s, box-shadow 0.2s; outline: none;
-    }
+    .input-field { -webkit-appearance: none; width: 100%; padding: 13px 14px 13px 40px; background: rgba(0,0,0,0.35); border: 1px solid var(--border); border-radius: 12px; color: var(--text); font-size: 15px; font-weight: 600; letter-spacing: 0.5px; transition: border-color 0.2s, box-shadow 0.2s; outline: none; }
     .input-field::placeholder { color: var(--muted); font-weight: 400; }
     .input-field:focus { border-color: var(--border-bright); box-shadow: var(--glow); }
 
@@ -147,46 +149,26 @@
       cursor: pointer; transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s; margin-bottom: 18px;
     }
     .generate-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(168,85,255,0.35); }
-    .generate-btn:active { transform: translateY(0); }
     .generate-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
     .loading { display: none; text-align: center; padding: 10px 0; }
-    .loader {
-      display: inline-block; width: 28px; height: 28px;
-      border: 2px solid rgba(168,85,255,0.15); border-top-color: var(--accent);
-      border-radius: 50%; animation: spin 0.8s linear infinite;
-    }
+    .loader { display: inline-block; width: 28px; height: 28px; border: 2px solid rgba(168,85,255,0.15); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
 
-    .code-display {
-      background: rgba(0,0,0,0.4); border: 1px solid var(--border); border-radius: 12px;
-      padding: 14px 16px; text-align: center; min-height: 52px;
-      display: flex; align-items: center; justify-content: center; margin-bottom: 12px;
-      font-family: 'Orbitron', monospace; font-size: 13px; color: var(--muted);
-      transition: border-color 0.3s, box-shadow 0.3s;
-    }
+    .code-display { background: rgba(0,0,0,0.4); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; text-align: center; min-height: 52px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; font-family: 'Orbitron', monospace; font-size: 13px; color: var(--muted); transition: border-color 0.3s, box-shadow 0.3s; }
     .code-display.has-code { border-color: rgba(0,255,179,0.35); box-shadow: 0 0 18px rgba(0,255,179,0.1); }
 
     .success-message { color: var(--success); display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 15px; letter-spacing: 1px; }
-    .error-message { color: var(--error); display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 13px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.5px; }
+    .error-message { color: var(--error); display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 13px; font-weight: 600; letter-spacing: 0.5px; }
 
     .copy-btn {
-      width: 100%; padding: 12px; background: var(--surface-hover); border: 1px solid var(--border); border-radius: 12px;
-      color: var(--text); font-family: 'Rajdhani', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
-      cursor: pointer; display: none; align-items: center; justify-content: center; gap: 8px; transition: all 0.2s; margin-bottom: 18px;
+      width: 100%; padding: 12px; background: var(--surface-hover); border: 1px solid var(--border); border-radius: 12px; color: var(--text); font-size: 13px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; display: none; align-items: center; justify-content: center; gap: 8px; transition: all 0.2s; margin-bottom: 18px;
     }
     .copy-btn:hover { border-color: var(--border-bright); background: rgba(168,85,255,0.1); color: var(--accent); }
 
     .footer { text-align: center; font-size: 11px; letter-spacing: 1.5px; color: var(--muted); text-transform: uppercase; }
     .footer span { color: var(--accent); font-weight: 600; }
 
-    #toast {
-      position: fixed; bottom: 28px; left: 50%;
-      transform: translateX(-50%) translateY(10px);
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color: #fff; padding: 10px 22px; border-radius: 50px;
-      font-family: 'Rajdhani', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 1px;
-      z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.3s, transform 0.3s;
-    }
+    #toast { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(10px); background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; padding: 10px 22px; border-radius: 50px; font-size: 13px; font-weight: 600; letter-spacing: 1px; z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.3s, transform 0.3s; }
     #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
     @media (max-width: 480px) { .container { padding: 24px 18px; } .title { font-size: 17px; } }
@@ -196,18 +178,17 @@
   <div class="container">
     <div class="header">
       <div class="logo-wrap">
-        <div class="logo-ring"></div>
-        <img class="logo-img" src="https://files.catbox.moe/nzc6xk.jpg" alt="logo"
-          onerror="this.style.display='none';document.querySelector('.logo-inner').style.display='flex'"/>
-        <div class="logo-inner"><i class="fas fa-robot"></i></div>
+  <div class="logo-ring"></div>
+  <img class="logo-img" src="https://files.catbox.moe/nzc6xk.jpg" alt="Logo"/>
+  <div class="logo-inner"><i class="fas fa-robot"></i></div>
       </div>
       <h1 class="title">MEGALODON-MD</h1>
-      <p class="subtitle">ᴘᴀɪʀ ᴄᴏᴅᴇ ʟɪɴᴋᴀɢᴇ</p>
+      <p class="subtitle">PAIR CODE LINKAGE</p>
       <div class="social-row">
-        <a href="https://www.youtube.com/@dybytech00" target="_blank" class="yt"><i class="fab fa-youtube"></i></a>
-        <a href="https://t.me/egdyby_tech" target="_blank" class="tg"><i class="fab fa-telegram-plane"></i></a>
-        <a href="https://whatsapp.com/channel/0029VbAdcIXJP216dKW1253g" target="_blank" class="wa"><i class="fab fa-whatsapp"></i></a>
-        <a href="https://github.com/DybyTech/MEGALODON-MD" target="_blank" class="gh"><i class="fab fa-github"></i></a>
+        <a href="https://www.youtube.com/@dybytech00" target="_blank" rel="noopener noreferrer" class="yt"><i class="fab fa-youtube"></i></a>
+        <a href="https://t.me/egdyby_tech" target="_blank" rel="noopener noreferrer" class="tg"><i class="fab fa-telegram-plane"></i></a>
+        <a href="https://whatsapp.com/channel/0029VbAdcIXJP216dKW1253g" target="_blank" rel="noopener noreferrer" class="wa"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://github.com/DybyTech/MEGALODON-MD" target="_blank" rel="noopener noreferrer" class="gh"><i class="fab fa-github"></i></a>
       </div>
     </div>
 
@@ -219,22 +200,18 @@
       <input type="tel" id="mobileNumber" class="input-field" placeholder="509XXXXXXXX (with country code)"/>
     </div>
 
-    <button class="generate-btn" id="submit">
-      <i class="fas fa-key"></i>&nbsp; GENERATE PAIR CODE
-    </button>
+    <button class="generate-btn" id="submit"><i class="fas fa-key"></i> GENERATE PAIR CODE</button>
 
     <div class="loading" id="loading"><div class="loader"></div></div>
 
-    <div class="code-display" id="codeDisplay">ʏᴏᴜʀ ᴄᴏᴅᴇ ᴡɪʟʟ ᴀᴘᴘᴇᴀʀ ʜᴇʀᴇ</div>
+    <div class="code-display" id="codeDisplay">Your code will appear here</div>
 
-    <button class="copy-btn" id="copy" onclick="copyCode()">
-      <i class="fas fa-copy"></i> COPY CODE
-    </button>
+    <button class="copy-btn" id="copy" onclick="copyCode()"><i class="fas fa-copy"></i> COPY CODE</button>
 
     <div class="footer">© 2025 <span>DYBY TECH</span> · MEGALODON-MD</div>
   </div>
 
-  <div id="toast"><i class="fas fa-check"></i>&nbsp; Code copied!</div>
+  <div id="toast"><i class="fas fa-check"></i> Code copied!</div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js"></script>
   <script>
@@ -245,11 +222,11 @@
       const loading   = document.getElementById("loading");
       const copyBtn   = document.getElementById("copy");
       const submitBtn = document.getElementById("submit");
-      const num = input.value.trim();
+      const num       = input.value.replace(/[^0-9]/g, "").trim();
 
-      if (!num) {
+      if (!num || !/^\d{8,15}$/.test(num)) {
         display.className = "code-display";
-        display.innerHTML = '<div class="error-message"><i class="fas fa-exclamation-circle"></i> Enter your WhatsApp number</div>';
+        display.innerHTML = '<div class="error-message"><i class="fas fa-exclamation-circle"></i> Enter a valid WhatsApp number</div>';
         copyBtn.style.display = "none";
         return;
       }
@@ -261,14 +238,14 @@
       copyBtn.style.display = "none";
 
       try {
-        const res  = await axios(`/code?number=${num.replace(/[^0-9]/g, "")}`);
+        const res  = await axios(`/code?number=${num}`);
         const code = res.data.code || "Service Unavailable";
         loading.style.display = "none";
         if (code.includes("Unavailable") || code.startsWith("❗")) {
           display.innerHTML = `<div class="error-message"><i class="fas fa-exclamation-circle"></i> ${code}</div>`;
         } else {
           display.className = "code-display has-code";
-          display.innerHTML = `<div class="success-message"><i class="fas fa-check-circle"></i>&nbsp;${code}</div>`;
+          display.innerHTML = `<div class="success-message"><i class="fas fa-check-circle"></i> ${code}</div>`;
           copyBtn.style.display = "flex";
         }
       } catch (err) {
@@ -280,8 +257,12 @@
     });
 
     function copyCode() {
-      const text = document.getElementById("codeDisplay").innerText.trim();
+      const text = document.getElementById("codeDisplay").textContent.trim();
       const btn  = document.getElementById("copy");
+      if (!navigator.clipboard) {
+        alert("Copy not supported, copy manually!");
+        return;
+      }
       navigator.clipboard.writeText(text).then(() => {
         btn.innerHTML = '<i class="fas fa-check"></i> COPIED!';
         btn.disabled = true;
