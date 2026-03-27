@@ -14,10 +14,9 @@
     "restart": "pm2 restart MEGALODON-MD"
   },
   "dependencies": {
-    "@WhiskeySockets/baileys": "7.0.0-rc.9",
+    "@WhiskeySockets/baileys": "^7.0.0-rc.6",
     "@adiwajshing/keyed-db": "^0.2.4",
-    "awesome-phonenumber": "^5.9.0",
-    "libsignal": "2.0.1",
+    "awesome-phonenumber": "^5.9.0",,
     "body-parser": "^1.20.3",
     "cors": "^2.8.5",
     "express": "^4.21.2",
