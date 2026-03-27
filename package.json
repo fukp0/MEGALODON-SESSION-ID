@@ -14,7 +14,7 @@
     "restart": "pm2 restart MEGALODON-MD"
   },
   "dependencies": {
-    "patron-pro": "latest",
+    "@WhiskeySockets/baileys": "latest",
     "@adiwajshing/keyed-db": "^0.2.4",
     "awesome-phonenumber": "^5.9.0",
     "libsignal": "2.0.1",
