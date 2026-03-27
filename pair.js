@@ -10,7 +10,7 @@ const {
     Browsers,
     makeCacheableSignalKeyStore,
     jidNormalizedUser
-} = require('@whiskeysockets/baileys');
+} = require('patron-pro');
 const { upload } = require('./mega');
 
 function removeFile(FilePath) {
