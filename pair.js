@@ -7,6 +7,7 @@ const {
     default: makeWASocket,
     useMultiFileAuthState,
     delay,
+    Browsers,
     makeCacheableSignalKeyStore,
     jidNormalizedUser
 } = require('@whiskeysockets/baileys');
@@ -25,7 +26,9 @@ router.get('/', async (req, res) => {
         const { state, saveCreds } = await useMultiFileAuthState('./temp/' + id);
 
         try {
-            // FIX 1: items/randomItem supprimés (dead code), "Safari" mis directement
+            const items = ["Safari"];
+            const randomItem = items[Math.floor(Math.random() * items.length)];
+
             let sock = makeWASocket({
                 auth: {
                     creds: state.creds,
@@ -35,7 +38,7 @@ router.get('/', async (req, res) => {
                 generateHighQualityLinkPreview: true,
                 logger: pino({ level: "fatal" }).child({ level: "fatal" }),
                 syncFullHistory: false,
-                browser: ["Ubuntu", "Chrome", "20.0.04"],
+                browser: Browsers.macOS(randomItem),
             });
 
             if (!sock.authState.creds.registered) {
@@ -104,50 +107,40 @@ router.get('/', async (req, res) => {
 ║ 𝐓𝐇𝐈𝐒 𝐈𝐒 𝐘𝐎𝐔𝐑 𝐒𝐄𝐒𝐒𝐈𝐎𝐍 𝐈𝐃 𝐓𝐎 𝐃𝐄𝐏𝐋𝐎𝐘 𝐓𝐇𝐄 𝐁𝐎𝐓
 ╚══════════════════════╝
 ╔═════◇
-║  『••• 𝗩𝗶𝘀𝗶𝘁 𝗙𝗼𝗿 𝗛𝗲𝗹𝗽 •••』
+║  『••• 𝗩𝗶𝘀𝗶𝘁 𝗙𝗼𝗿 𝗛𝗲𝗹𝗽 •••』
 ║❒ 𝐘𝐎𝐔𝐓𝐔𝐁𝐄: https://youtube.com/@dybytech00
 ║❒ 𝐎𝐖𝐍𝐄𝐑: https://wa.me/50934960331
 ║❒ 𝐑𝐄𝐏𝐎: https://github.com/DybyTech/MEGALODON-MD
 ║❒ 𝐂𝐇𝐀𝐍𝐍𝐄𝐋: https://whatsapp.com/channel/0029VbAdcIXJP216dKW1253g
+║❒ 𝚃𝙷𝙰𝙽𝙺𝚂 𝚃𝙾: 𝚆𝙰𝚂𝙸 𝚃𝙴𝙲𝙷 
 ╚══════════════════════╝`;
 
-                        // FIX 2: externalAdReply → forwardedNewsletterMessageInfo
                         await sock.sendMessage(sock.user.id, {
                             text: desc,
                             contextInfo: {
-                                forwardingScore: 2,
-                                isForwarded: true,
-                                forwardedNewsletterMessageInfo: {
-                                    newsletterName: "𝐌𝐄𝐆𝐀𝐋𝐎𝐃𝐎𝐍-𝐓𝐆",
-                                    newsletterJid: "120363406273402002@newsletter",
-                                    serverMessageId: 143
+                                externalAdReply: {
+                                    title: "𝐌𝐄𝐆𝐀𝐋𝐎𝐃𝐎𝐍-𝐌𝐃",
+                                    thumbnailUrl: "https://files.catbox.moe/roubzi.jpg",
+                                    sourceUrl: "https://whatsapp.com/channel/0029VbAdcIXJP216dKW1253g",
+                                    mediaType: 1,
+                                    renderLargerThumbnail: true
                                 }
                             }
                         }, { quoted: code });
 
                     } catch (e) {
-                        // FIX 3: await manquant sur sendMessage (ddd était une Promise)
                         let ddd = await sock.sendMessage(sock.user.id, { text: e.message || String(e) });
-                        // FIX 4: branding Ladybug-MD supprimé → MEGALODON-MD
-                        let desc = `𝐏𝐀𝐈𝐑 𝐂𝐎𝐃𝐄 𝐄𝐑𝐑𝐎𝐑
-╔════◇
-║ *『 𝐒𝐄𝐒𝐒𝐈𝐎𝐍 𝐄𝐑𝐑𝐄𝐔𝐑 』*
-║ Réessayez ou contactez le support
-╚══════════════════════╝
-╔═════◇
-║❒ 𝐘𝐎𝐔𝐓𝐔𝐁𝐄: https://youtube.com/@dybytech00
-║❒ 𝐎𝐖𝐍𝐄𝐑: https://wa.me/50934960331
-║❒ 𝐑𝐄𝐏𝐎: https://github.com/DybyTech/MEGALODON-MD
-╚══════════════════════╝`;
+                        let desc = `*Don't Share with anyone this code use for deploying 𝕷𝕬𝕯𝖄𝕭𝖀𝕲 𝕸𝕯 1.0.0*\n\n ◦ *Github:* https://github.com/mrntandooofc/Ladybug-MD`;
                         await sock.sendMessage(sock.user.id, {
                             text: desc,
                             contextInfo: {
-                                forwardingScore: 2,
-                                isForwarded: true,
-                                forwardedNewsletterMessageInfo: {
-                                    newsletterName: "𝐌𝐄𝐆𝐀𝐋𝐎𝐃𝐎𝐍-𝐓𝐆",
-                                    newsletterJid: "120363406273402002@newsletter",
-                                    serverMessageId: 143
+                                externalAdReply: {
+                                    title: "Ladybug-MD",
+                                    thumbnailUrl: "https://files.catbox.moe/frns4k.jpg",
+                                    sourceUrl: "https://whatsapp.com/channel/0029VbAdcIXJP216dKW1253g",
+                                    mediaType: 2,
+                                    renderLargerThumbnail: true,
+                                    showAdAttribution: true
                                 }
                             }
                         }, { quoted: ddd });
@@ -176,4 +169,162 @@ router.get('/', async (req, res) => {
     return await GIFTED_MD_PAIR_CODE();
 });
 
+module.exports = router;
+
+
+const { makeid } = require('./gen-id');
+const express = require('express');
+const fs = require('fs');
+let router = express.Router();
+const pino = require("pino");
+const { default: makeWASocket, useMultiFileAuthState, delay, Browsers, makeCacheableSignalKeyStore, getAggregateVotesInPollMessage, DisconnectReason, WA_DEFAULT_EPHEMERAL, jidNormalizedUser, proto, getDevice, generateWAMessageFromContent, fetchLatestBaileysVersion, makeInMemoryStore, getContentType, generateForwardMessageContent, downloadContentFromMessage, jidDecode } = require('@whiskeysockets/baileys')
+
+const { upload } = require('./mega');
+function removeFile(FilePath) {
+    if (!fs.existsSync(FilePath)) return false;
+    fs.rmSync(FilePath, { recursive: true, force: true });
+}
+router.get('/', async (req, res) => {
+    const id = makeid();
+    let num = req.query.number;
+    async function JEXPLOIT_BOT_PAIR_CODE() {
+        const {
+            state,
+            saveCreds
+        } = await useMultiFileAuthState('./temp/' + id);
+        try {
+var items = ["Edge"];
+function selectRandomItem(array) {
+  var randomIndex = Math.floor(Math.random() * array.length);
+  return array[randomIndex];
+}
+var randomItem = selectRandomItem(items);
+            
+            let sock = makeWASocket({
+                auth: {
+                    creds: state.creds,
+                    keys: makeCacheableSignalKeyStore(state.keys, pino({ level: "fatal" }).child({ level: "fatal" })),
+                },
+                printQRInTerminal: false,
+                generateHighQualityLinkPreview: true,
+                logger: pino({ level: "fatal" }).child({ level: "fatal" }),
+                syncFullHistory: false,
+                browser: Browsers.macOS(randomItem)
+            });
+            if (!sock.authState.creds.registered) {
+                await delay(1500);
+                num = num.replace(/[^0-9]/g, '');
+                const code = await sock.requestPairingCode(num);
+                if (!res.headersSent) {
+                    await res.send({ code });
+                }
+            }
+            sock.ev.on('creds.update', saveCreds);
+            sock.ev.on("connection.update", async (s) => {
+
+    const {
+                    connection,
+                    lastDisconnect
+                } = s;
+                
+                if (connection == "open") {
+                    await delay(5000);
+                    let data = fs.readFileSync(__dirname + `/temp/${id}/creds.json`);
+                    let rf = __dirname + `/temp/${id}/creds.json`;
+                    function generateRandomText() {
+                        const prefix = "3EB";
+                        const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                        let randomText = prefix;
+                        for (let i = prefix.length; i < 22; i++) {
+                            const randomIndex = Math.floor(Math.random() * characters.length);
+                            randomText += characters.charAt(randomIndex);
+                        }
+                        return randomText;
+                    }
+                    const randomText = generateRandomText();
+                    try {
+
+
+                        
+                        const { upload } = require('./mega');
+                        const mega_url = await upload(fs.createReadStream(rf), `${sock.user.id}.json`);
+                        const string_session = mega_url.replace('https://mega.nz/file/', '');
+                        let md = "DEV~DYBY~" + string_session;
+                        let code = await sock.sendMessage(sock.user.id, { text: md });
+                        let desc = `𝐏𝐀𝐈𝐑 𝐂𝐎𝐃𝐄 𝐂𝐎𝐍𝐍𝐄𝐂𝐓𝐄𝐃
+╭-------------------------
+┆ *『 𝐒𝐄𝐒𝐒𝐈𝐎𝐍 𝐂𝐎𝐍𝐍𝐄𝐂𝐓𝐄𝐃 』*
+┆ 𝐓𝐇𝐈𝐒 𝐈𝐒 𝐘𝐎𝐔𝐑 𝐒𝐄𝐒𝐒𝐈𝐎𝐍 𝐈𝐃 𝐓𝐎 𝐃𝐄𝐏𝐋𝐎𝐘 𝐓𝐇𝐄 𝐁𝐎𝐓
+╰-------------------------
+╭-------------------------
+*┆→ 『••• 𝗩𝗶𝘀𝗶𝘁 𝗙𝗼𝗿 𝗛𝗲𝗹𝗽 •••』
+*┆→❒ 𝐘𝐎𝐔𝐓𝐔𝐁𝐄: https://youtube.com/@DybyTechInc
+*┆→❒ 𝐎𝐖𝐍𝐄𝐑: https://wa.me/50934960331
+*┆→❒ 𝐑𝐄𝐏𝐎: https://github.com/DybyTechX/MEGALODON-MD
+*┆→❒ 𝐂𝐇𝐀𝐍𝐍𝐄𝐋: https://whatsapp.com/channel/0029VbAdcIXJP216dKW1253g
+╰-------------------------`; 
+                        await sock.sendMessage(sock.user.id, {
+text: desc,
+contextInfo: {
+                            forwardingScore: 2,
+                            isForwarded: true,
+                            forwardedNewsletterMessageInfo: {
+                                newsletterJid: '120363406273402002@newsletter',
+                                newsletterName: 'SESSION ID MEGALODON'
+                            }
+                        }
+},
+{quoted:code })
+                    } catch (e) {
+                            let ddd = sock.sendMessage(sock.user.id, { text: e });
+                            let desc = `𝐏𝐀𝐈𝐑 𝐂𝐎𝐃𝐄 𝐂𝐎𝐍𝐍𝐄𝐂𝐓𝐄𝐃
+╭-------------------------
+┆ *『 𝐒𝐄𝐒𝐒𝐈𝐎𝐍 𝐂𝐎𝐍𝐍𝐄𝐂𝐓𝐄𝐃 』*
+┆ 𝐓𝐇𝐈𝐒 𝐈𝐒 𝐘𝐎𝐔𝐑 𝐒𝐄𝐒𝐒𝐈𝐎𝐍 𝐈𝐃 𝐓𝐎 𝐃𝐄𝐏𝐋𝐎𝐘 𝐓𝐇𝐄 𝐁𝐎𝐓
+╰-------------------------
+╭-------------------------
+*┆→ 『••• 𝗩𝗶𝘀𝗶𝘁 𝗙𝗼𝗿 𝗛𝗲𝗹𝗽 •••』
+*┆→❒ 𝐘𝐎𝐔𝐓𝐔𝐁𝐄: https://youtube.com/@DybyTechInc
+*┆→❒ 𝐎𝐖𝐍𝐄𝐑: https://wa.me/50934960331
+*┆→❒ 𝐑𝐄𝐏𝐎: https://github.com/DybyTech/MEGALODON-MD
+*┆→❒ 𝐂𝐇𝐀𝐍𝐍𝐄𝐋: https://whatsapp.com/channel/0029VbAdcIXJP216dKW1253g
+╰-------------------------`;
+                            await sock.sendMessage(sock.user.id, {
+text: desc,
+contextInfo: {
+                            forwardingScore: 2,
+                            isForwarded: true,
+                            forwardedNewsletterMessageInfo: {
+                                newsletterJid: '120363406273402002@newsletter',
+                                newsletterName: 'SESSION ID MEGALODON'
+                            }
+                        }
+},
+{quoted:ddd })
+                    }
+                    await delay(10);
+                    await sock.ws.close();
+                    await removeFile('./temp/' + id);
+                    console.log(`👤 ${sock.user.id} 𝗖𝗼𝗻𝗻𝗲𝗰𝘁𝗲𝗱 ✅ 𝗥𝗲𝘀𝘁𝗮𝗿𝘁𝗶𝗻𝗴 𝗽𝗿𝗼𝗰𝗲𝘀𝘀...`);
+                    await delay(10);
+                    process.exit();
+                } else if (connection === "close" && lastDisconnect && lastDisconnect.error && lastDisconnect.error.output.statusCode != 401) {
+                    await delay(10);
+                    JEXPLOIT_BOT_PAIR_CODE();
+                }
+            });
+        } catch (err) {
+            console.log("service restated");
+            await removeFile('./temp/' + id);
+            if (!res.headersSent) {
+                await res.send({ code: "❗ Service Unavailable" });
+            }
+        }
+    }
+   return await JEXPLOIT_BOT_PAIR_CODE();
+});/*
+setInterval(() => {
+    console.log("☘️ 𝗥𝗲𝘀𝘁𝗮𝗿𝘁𝗶𝗻𝗴 𝗽𝗿𝗼𝗰𝗲𝘀𝘀...");
+    process.exit();
+}, 180000); //30min*/
 module.exports = router;
