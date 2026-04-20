@@ -1,29 +1,33 @@
 {
-    "description": "session",
-    "main": "./index.js",
-  "engines" : { 
-    "npm" : ">=9.7.2",
-    "node" : ">=20.0.0"
-    },
-    "scripts": {
-    "start": "node index.js"
+  "name": "web-pair",
+  "version": "1.0.0",
+  "description": "Multi-functional WhatsApp bot using Baileys (Web Pair Code)",
+  "main": "index.js",
+  "private": true,
+
+  "scripts": {
+    "start": "pm2 start index.js --name web-pair --attach --time",
+    "stop": "pm2 stop web-pair",
+    "restart": "pm2 restart web-pair",
+    "logs": "pm2 logs web-pair",
+    "dev": "node index.js"
   },
-  "author": "Malvin King",
-  "license": "GPL-3.0 license",
+
+  "engines": {
+    "node": ">=18"
+  },
+
   "dependencies": {
-    "baileys-pro": "latest",
-    "maher-zubair-baileys": "^6.6.5",
-    "@whiskeysockets/baileys": "npm:wileys",
-    "qrcode": "^1.5.3",
+    "@whiskeysockets/baileys": "github:DybyTechInc/baileys",
+    "@adiwajshing/keyed-db": "^0.2.4",
+    "async-mutex": "^0.4.1",
     "awesome-phonenumber": "^2.64.0",
-    "pino": "^8.1.0",
-    "phone" : "3.1.30",
-    "body-parser": "^1.20.1",
-    "pastebin-js": "^1.0.6",
-    "express": "^4.18.1",
-    "path": "^0.12.7",
+    "body-parser": "^1.20.2",
+    "express": "^4.19.2",
     "megajs": "1.1.7",
-    "baileys-elite" : "latest",
-    "jimp": "^0.16.13"
-   }
+    "pino": "^8.17.0",
+    "pm2": "^5.4.0",
+    "qrcode": "^1.5.4",
+    "phone": "3.1.30"
+  }
 }
