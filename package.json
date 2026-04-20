@@ -18,7 +18,7 @@
   },
 
   "dependencies": {
-    "@whiskeysockets/baileys": "github:DybyTechInc/baileys",
+    "@whiskeysockets/baileys": "github:DybyTechX/Baileys",
     "@adiwajshing/keyed-db": "^0.2.4",
     "async-mutex": "^0.4.1",
     "awesome-phonenumber": "^2.64.0",
