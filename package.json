@@ -13,9 +13,9 @@
     "dev": "node index.js"
   },
 
-  "engines": {
-    "node": ">=18"
-  },
+"engines": {
+  "node": ">=18 <22"
+},
 
   "dependencies": {
     "@whiskeysockets/baileys": "github:DybyTechX/Baileys",
