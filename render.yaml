@@ -4,6 +4,6 @@ services:
     env: docker
     plan: free
     branch: main
-    repo: https://github.com/townen2/meg-lodon-session
+    repo: https://github.com/DybyTechX/MEGALODON-SESSION-ID
     dockerfilePath: ./Dockerfile
     autoDeploy: true
